@@ -1,0 +1,18 @@
+body {
+    font-family: sans-serif;
+    margin: 1em 5em 1em 5em;
+}
+
+ul {
+    list-style-type: none;
+}
+
+form {
+    padding-top: 1em;
+    border-top: thin solid;
+    line-height: .3em;
+}
+
+form legend {
+    padding-bottom: 1em;
+}
