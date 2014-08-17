@@ -1,0 +1,15 @@
+A very small link app for exposing links.
+
+This is intended to be a solution for the problem of getting at links
+you're developing locally but that you need to see on your mobile.
+
+Simply register, then use the form or the url to POST your link to the
+site.
+
+Then visit the site on the mobile and you'll be able to see the link.
+
+Of course, you must both be on the same LAN for this to work.
+
+If you want a more sophisticated solution check
+out [[http://localtunnel.me/]]
+
