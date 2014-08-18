@@ -1,15 +1,85 @@
+= Linky =
+
 A very small link app for exposing links.
 
-This is intended to be a solution for the problem of getting at links
-you're developing locally but that you need to see on your mobile.
+== What? ==
 
-Simply register, then use the form or the url to POST your link to the
-site.
+You're developing a webapp locally, on your laptop, perhaps with
+Elnode but it could be anything.
 
-Then visit the site on the mobile and you'll be able to see the link.
+You want to test a media query intended to make the site work better
+on a mobile. But your mobile doesn't know what your laptop's address
+is.
 
-Of course, you must both be on the same LAN for this to work.
+Now you're stuck. 
+
+Linky is a stupid little link store. You run it on the Internet at a
+known address, say: http://linky.elnode.org
+
+Then you can post a link to your app running on your laptop's local IP
+address and port.
+
+Then you can browse to the same linky site on your mobile and find the
+link.
+
+== More details? ==
+
+Linky has a simple basic authentication and registration system, so
+your links are separate from other people's links. 
+
+It's not intended to be secure though, presumably only people on your
+LAN can see the app that is linked to on linky.
+
+
+=== registering ===
+
+You can register with a simple HTTP call:
+
+{{{
+curl -d "username=tony&password=secret" http://linky.elnode.org/register/
+}}}
+
+this will return a redirect to the login page.
+
+=== login ===
+
+Login is just basic auth:
+
+{{{
+curl --basic -u tony:secret http://linky.elnode.org/
+}}}
+
+Would return your list of links.
+
+Login does cause an authentication cookie to be returned so you can
+use that to re-authenticate. It's not necessary though, you could just
+pass auth details all the time.
+
+=== POSTing a link ===
+
+POSTing a link is easy too:
+
+{{{
+curl --basic -u tony:secret \
+     -d "a=http://10.1.1.203:8066&n=a+little+app" http://linky.elnode.org
+}}}
+
+Would return a redirect to {{{/}}}
+
+
+== Other options? ==
 
 If you want a more sophisticated solution check
-out [[http://localtunnel.me/]]
+out [[http://localtunnel.me/]] which is a reverse proxy to a well
+known site on the Internet.
+
+The trouble with this solution is that your mobile requires a
+connection to the Internet for the whole session, instead of just the
+initial discovery.
+
+
+The real solution for this is for mobile browsers to support MDNS
+natively, then you could set up MDNS resolution for your laptop and
+your mobile could just find it. There are probably security issues
+with that though.
 
