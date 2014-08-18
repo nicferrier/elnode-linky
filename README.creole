@@ -77,6 +77,14 @@ The trouble with this solution is that your mobile requires a
 connection to the Internet for the whole session, instead of just the
 initial discovery.
 
+Another solution to this is to use an authentication based url
+shortener, something like [[http://goo.gl]]. Just paste your site into
+the shortener, if you're loggedin to the same account on your mobile
+you can retrieve it. 
+
+This is basically the same as Linky. The difference is that you have
+to be logged in to Google and it's therefore harder to {{{curl}}} the
+address into it.
 
 The real solution for this is for mobile browsers to support MDNS
 natively, then you could set up MDNS resolution for your laptop and
