@@ -121,12 +121,19 @@ to describe it.  If not given then we just use the ADDRESS."
    linky/docroot elnode-webserver-extra-mimetypes))
 
 (defun linky-router (httpcon)
+  "Simple router for `linky'."
   (elnode-dispatcher
    httpcon
    '(("^/-/\\(.*\\)" . linky/ws)
      ("^/register/" . linky/register)
      ("^/$" . linky))
    :auth-scheme :linky-auth))
+
+
+(elnode-start
+ 'linky-router
+ :port 8005
+ :host "0.0.0.0")
 
 (provide 'linky)
 
