@@ -30,7 +30,11 @@
 
 (defvar linky/auth-db   ;; this needs to be stored in a docker volume
   (db-make
-   `(db-hash :filename ,(expand-file-name "auth-db" default-directory)))
+   `(db-hash
+     :filename ,(let ((file
+                       (expand-file-name "db/auth-db" default-directory)))
+                     (make-directory (file-name-directory file) t)
+                     file)))
   "The db where we store user information.")
 
 (elnode-defauth :linky-auth
