@@ -7,5 +7,6 @@ WORKDIR /home/emacs/elnode-linky
 # RUN npm install .   ### don't need node yet!
 EXPOSE 8005
 VOLUME /home/emacs/elnode-linky/db
+VOLUME /home/emacs/.emacs.d
 ENV ETAG 20140816213427254185764
 CMD /usr/local/emacs/bin/emacs -daemon -l linky.el ; tail -f /dev/null
