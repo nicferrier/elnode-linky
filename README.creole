@@ -1,8 +1,8 @@
-= Linky =
+= linky =
 
 A very small link app for exposing links.
 
-== What? ==
+== what? ==
 
 You're developing a webapp locally, on your laptop, perhaps with
 Elnode but it could be anything.
@@ -22,7 +22,7 @@ address and port.
 Then you can browse to the same linky site on your mobile and find the
 link.
 
-== More details? ==
+== more details? ==
 
 Linky has a simple basic authentication and registration system, so
 your links are separate from other people's links. 
@@ -43,31 +43,41 @@ this will return a redirect to the login page.
 
 === login ===
 
-Login is just basic auth:
+Login is just form/cookie auth:
 
 {{{
-curl --basic -u tony:secret http://linky.elnode.org/
+curl -c ~/.cookies -d "username=tony&password=secret" http://linky.elnode.org/login/
 }}}
 
-Would return your list of links.
+Will login and store the cookie in {{{~/.cookies}}}. You can then
+issue further curl's:
 
-Login does cause an authentication cookie to be returned so you can
-use that to re-authenticate. It's not necessary though, you could just
-pass auth details all the time.
+{{{
+curl -b ~/.cookies http://linky.elnode.org/
+}}}
+
 
 === POSTing a link ===
 
 POSTing a link is easy too:
 
 {{{
-curl --basic -u tony:secret \
-     -d "a=http://10.1.1.203:8066&n=a+little+app" http://linky.elnode.org
+curl -b ~/.cookies \
+     -d "a=http://10.1.1.203:8066&n=a+little+app" \
+     http://linky.elnode.org
 }}}
 
 Would return a redirect to {{{/}}}
 
 
-== Other options? ==
+=== using with elnode ===
+
+If you use elnode there's linky-client included here. It provides an
+M-x command for POSTing a link to a running elnode server to linky.
+
+linky-client needs the {{{ip}}} command and GNU sed.
+
+== other options? ==
 
 If you want a more sophisticated solution check
 out [[http://localtunnel.me/]] which is a reverse proxy to a well
