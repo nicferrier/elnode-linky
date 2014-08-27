@@ -62,6 +62,8 @@ Other information may be added to the EXTENDED-INFO.")
     (format "<!doctype html>
 <html>
 <head>
+<title>linky!</title>
+<meta name=\"viewport\" content=\"width=450,user-scalable=no\"></meta>
 <meta charset=\"utf-8\"></meta>
 <link rel=\"stylesheet\" href=\"/-/style.css\" type=\"text/css\"></link>
 </head>
@@ -132,7 +134,6 @@ to describe it.  If not given then we just use the ADDRESS."
      ("^/register/" . linky/register)
      ("^/$" . linky))
    :auth-scheme :linky-auth))
-
 
 (elnode-start
  'linky-router
