@@ -4,7 +4,7 @@
 
 ;; Author: Nic Ferrier <nferrier@ferrier.me.uk>
 ;; Keywords: hypermedia
-;; Version: 0.0.1
+;; Version: 0.0.2
 ;; Created: Fri Aug 29 23:07:28 BST 2014
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -63,6 +63,7 @@
 (defvar linky-curl/username-history nil
   "History for usernames.")
 
+;;;###autoload
 (defun linky-curl (port name &optional username password)
   "A simple linky client.
 
