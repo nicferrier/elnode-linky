@@ -1,6 +1,50 @@
-;;; A little client for linky
+;;; linky-client.el --- a client for linky.elnode.org -*- lexical-binding: t -*-
 
-(require 'web)
+;; Copyright (C) 2014  Nic Ferrier
+
+;; Author: Nic Ferrier <nferrier@ferrier.me.uk>
+;; Keywords: hypermedia
+;; Version: 0.0.1
+;; Created: Fri Aug 29 23:07:28 BST 2014
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;; This is a curl based client for linky, a little HTTP-link tool
+;; allowing you to post local links to an Internet site. This is
+;; mostly useful if you're developing on multiple devices and you need
+;; one to see the other without having to discover IPs (or indeed type
+;; them in on fiddly mobile keyboards).
+
+;; This client is based on sending a link to an elnode service being
+;; hosted in your emacs, but may offer a generic interface in the
+;; future, if I can be arsed. I have not packaged depended on elnode
+;; because I may remove the dependency in the future.
+
+;; The client sends requests to http://elnode.linky.org but you could
+;; use any server, linky is available as a docker which you could just
+;; run yourself.
+
+;; See http://github.com/nicferrier/elnode-linky for more information
+;; about linky, or
+;; https://registry.hub.docker.com/u/nicferrier/elnode-linky for more
+;; information about the docker.
+
+;;; Code:
+
+;;(require 'web)
 (require 'rx)
 
 (defun linky-web-client ()
@@ -92,5 +136,7 @@ work."
               (curl "/" "b" post-data)
               ;; Else...
               (error "linky: login failed!")))))))
+
+(provide 'linky-client)
 
 ;;; linky-client.el ends here
