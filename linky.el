@@ -75,8 +75,12 @@ Other information may be added to the EXTENDED-INFO.")
 </body></html>"
             (->> details
               (--map (format
-                      "<li><a href=\"%s\">%s</a></li>"
-                      (car it) (or (cadr it) (car it))))
+                      "<li><a href=\"%s\">%s %s</a></li>"
+                      (car it)
+                      (or (cadr it) (car it))
+                      (if (car it)
+                          (format "<span class=\"url\">[%s]</span>" (car it))
+                          "")))
               (s-join "\n"))
             linky/form-html)))
 
