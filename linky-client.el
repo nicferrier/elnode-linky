@@ -81,7 +81,9 @@ work."
              (format
               "%d %s"
               (car it)
-              (elnode/con-lookup (cdr it) :elnode-http-handler)) (car it)) 
+              (let ((handler (elnode/con-lookup (cdr it) :elnode-http-handler)))
+                (when (functionp handler) (documentation handler))))
+             (car it)) 
             elnode-server-socket))
           (chosen
            (kva
@@ -89,9 +91,11 @@ work."
             completions)))
      (list chosen
            (format "%s"
-                   (elnode/con-lookup
-                    (kva chosen elnode-server-socket)
-                    :elnode-http-handler)))))
+                   (let ((handler 
+                          (elnode/con-lookup
+                           (kva chosen elnode-server-socket)
+                           :elnode-http-handler)))
+                     (when (functionp handler) (documentation handler)))))))
   (noflet ((curl (url cookie-flag data) ; a function to do curl
              (let* ((curl-cmd
                      (format
